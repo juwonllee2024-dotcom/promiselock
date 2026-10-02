@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "PromiseLock",
+  "version": "0.1.0",
+  "description": "Pause a browser message when its attachment, link, or placeholder claim has no visible proof.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_title": "Enable PromiseLock on this tab",
+    "default_popup": "popup.html"
+  }
+}

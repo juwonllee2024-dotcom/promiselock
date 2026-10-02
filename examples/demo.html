@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PromiseLock demo</title>
+    <style>
+      :root { color-scheme: dark; font-family: system-ui, sans-serif; }
+      body { max-width: 760px; margin: 0 auto; padding: 48px 24px; background: #0d100d; color: #f5f4e9; }
+      h1 { font-size: clamp(34px, 8vw, 72px); line-height: .95; margin: 0 0 18px; color: #e4fa74; }
+      p { color: #b9c1ae; line-height: 1.5; }
+      form { margin-top: 36px; padding: 24px; border: 1px solid #343b2b; border-radius: 16px; background: #151a13; }
+      label { display: block; margin-bottom: 8px; color: #d6dec8; font-weight: 700; }
+      textarea { width: 100%; min-height: 150px; box-sizing: border-box; resize: vertical; border: 1px solid #505b3c; border-radius: 10px; padding: 12px; background: #0d100d; color: #f5f4e9; font: inherit; }
+      .row { display: flex; align-items: center; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
+      button { border: 0; border-radius: 9px; padding: 10px 14px; background: #e4fa74; color: #11130f; font-weight: 800; cursor: pointer; }
+      button.secondary { border: 1px solid #5a6740; background: transparent; color: #d6dec8; }
+      #attachment { color: #e4fa74; }
+      #result { min-height: 1.4em; color: #b9c1ae; }
+      code { color: #e4fa74; }
+    </style>
+  </head>
+  <body>
+    <h1>Say it. Prove it.</h1>
+    <p>Try sending a message that says “I attached the report.” PromiseLock pauses it because this demo has no visible attachment. Add the fake file, then send again.</p>
+    <form id="demo-form">
+      <label for="message">Message</label>
+      <textarea id="message">I attached the report for review.</textarea>
+      <div class="row">
+        <button class="secondary" id="toggle-attachment" type="button">Add fake report.pdf</button>
+        <span id="attachment" hidden data-promiselock-attachment="true">report.pdf attached</span>
+      </div>
+      <div class="row">
+        <button type="submit">Send message</button>
+        <span id="result" role="status"></span>
+      </div>
+    </form>
+    <p>Everything runs in this tab. No message leaves your browser.</p>
+    <script src="/dist/content.js"></script>
+    <script>
+      const form = document.querySelector("#demo-form");
+      const attachment = document.querySelector("#attachment");
+      const toggle = document.querySelector("#toggle-attachment");
+      const result = document.querySelector("#result");
+      toggle.addEventListener("click", () => {
+        attachment.hidden = !attachment.hidden;
+        toggle.textContent = attachment.hidden ? "Add fake report.pdf" : "Remove fake report.pdf";
+      });
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        result.textContent = "Sent by the demo form.";
+      });
+    </script>
+  </body>
+</html>
